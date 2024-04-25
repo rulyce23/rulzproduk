@@ -3,6 +3,7 @@ namespace App\Controllers;
 use App\Models\T_Pengantin;
 use App\Models\T_Grooms;
 use App\Models\T_Family;
+use App\Models\T_Gallery;
 use App\Models\T_Ucapan;
 
 
@@ -13,11 +14,13 @@ class Home extends BaseController
         $model = new T_Pengantin();
         $model2 = new T_Grooms();
         $model3 = new T_Family();
+        $model4 = new T_Gallery();
 
 
         $data['pengantin'] = $model->first();
         $data['grooms'] = $model2->findAll();
         $data['family'] = $model3->findAll();
+        $data['gallery'] = $model4->first();
         
         
         return view('v_home', $data); // Mengirimkan data ke view

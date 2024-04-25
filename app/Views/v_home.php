@@ -344,41 +344,43 @@
         </div>
         <div class="owl-carousel gallery-carousel">
             <div class="gallery-item">
-                <img class="img-fluid w-100" src="img/gallery-1.jpg" alt="">
+                <img class="img-fluid w-100" src="<?= base_url();?>/wedding/img/<?= $gallery['foto']?>" alt="">
                 <a href="img/gallery-1.jpg" data-lightbox="gallery">
                     <i class="fa fa-2x fa-plus text-white"></i>
                 </a>
             </div>
-            <div class="gallery-item">
-                <img class="img-fluid w-100" src="img/gallery-2.jpg" alt="">
+             <div class="gallery-item">
+             <img class="img-fluid w-100" src="<?= base_url();?>/wedding/img/<?= $gallery['foto2']?>" alt="">
                 <a href="img/gallery-2.jpg" data-lightbox="gallery">
                     <i class="fa fa-2x fa-plus text-white"></i>
                 </a>
-            </div>
+            </div> 
             <div class="gallery-item">
-                <img class="img-fluid w-100" src="img/gallery-3.jpg" alt="">
-                <a href="img/gallery-3.jpg" data-lightbox="gallery">
+            <img class="img-fluid w-100" src="<?= base_url();?>/wedding/img/<?= $gallery['foto3']?>" alt="">
+                            <a href="img/gallery-3.jpg" data-lightbox="gallery">
                     <i class="fa fa-2x fa-plus text-white"></i>
                 </a>
             </div>
             <div class="gallery-item">
-                <img class="img-fluid w-100" src="img/gallery-4.jpg" alt="">
+            <img class="img-fluid w-100" src="<?= base_url();?>/wedding/img/<?= $gallery['foto4']?>" alt="">
                 <a href="img/gallery-4.jpg" data-lightbox="gallery">
                     <i class="fa fa-2x fa-plus text-white"></i>
                 </a>
             </div>
             <div class="gallery-item">
-                <img class="img-fluid w-100" src="img/gallery-5.jpg" alt="">
+            <img class="img-fluid w-100" src="<?= base_url();?>/wedding/img/<?= $gallery['foto5']?>" alt="">
+            
                 <a href="img/gallery-5.jpg" data-lightbox="gallery">
                     <i class="fa fa-2x fa-plus text-white"></i>
                 </a>
             </div>
             <div class="gallery-item">
-                <img class="img-fluid w-100" src="img/gallery-6.jpg" alt="">
+            <img class="img-fluid w-100" src="<?= base_url();?>/wedding/img/<?= $gallery['foto6']?>" alt="">
+            
                 <a href="img/gallery-6.jpg" data-lightbox="gallery">
                     <i class="fa fa-2x fa-plus text-white"></i>
                 </a>
-            </div>
+            </div> 
         </div>
     </div>
     <!-- Gallery End -->

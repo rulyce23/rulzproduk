@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2024 at 05:07 PM
+-- Generation Time: Apr 25, 2024 at 05:31 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -52,8 +52,20 @@ CREATE TABLE `t_gallery` (
   `id` int(11) NOT NULL,
   `nama_foto` varchar(155) NOT NULL,
   `tanggal_foto` datetime NOT NULL,
-  `foto` text NOT NULL
+  `foto` text NOT NULL,
+  `foto2` text NOT NULL,
+  `foto3` text NOT NULL,
+  `foto4` text NOT NULL,
+  `foto5` text NOT NULL,
+  `foto6` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `t_gallery`
+--
+
+INSERT INTO `t_gallery` (`id`, `nama_foto`, `tanggal_foto`, `foto`, `foto2`, `foto3`, `foto4`, `foto5`, `foto6`) VALUES
+(1, 'Ruper Gallery', '2024-04-25 17:14:53', 'me.jfif', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -180,7 +192,7 @@ ALTER TABLE `t_family`
 -- AUTO_INCREMENT for table `t_gallery`
 --
 ALTER TABLE `t_gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `t_grooms`
