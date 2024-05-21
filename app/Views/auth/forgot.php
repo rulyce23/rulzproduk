@@ -5,8 +5,8 @@
 
 <div class="card">
     <div class="card-body text-center">
-        <div class="mb-5">
-        <center> <img src ="img/rullz.jpg" width="150" height="150" alt="logo"  style="border-radius: 50%; margin-top:30px;"></center>
+        <div class="mb-4">
+        <center> <img src ="img/rullz.jpg" height="90" alt="logo"  style="border-radius: 50%; margin-top:50px;"></center>
 
         </div>
         <h4 class="mb-4 text-muted">Forgot Password</h4>
@@ -21,5 +21,5 @@
         </form>
     </div>
 </div>
-
+<br><br><br>
 <?= $this->endSection() ?>

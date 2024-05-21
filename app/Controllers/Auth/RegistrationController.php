@@ -40,7 +40,7 @@ class RegistrationController extends Controller
 			return redirect()->to('account');
 		}
 
-		return view('auth/register');
+		return view('register');
 	}
 
     //--------------------------------------------------------------------

@@ -5,6 +5,10 @@ use CodeIgniter\Controller;
 use Config\Email;
 use Config\Services;
 use App\Models\UserModel;
+use App\Models\Customer;
+use App\Models\Barang;
+use App\Models\Transaksi;
+
 
 class AccountController extends Controller
 {
@@ -41,8 +45,27 @@ class AccountController extends Controller
 			return redirect()->to('login');
 		}
 
+		$customer = new Customer();
+
+		// getall users
+		$allcust = $customer->countAll(); 
+
+		$barang = new Barang();
+
+		// getall users
+		$allbarang = $barang->countAll(); 
+
+
+		$transaksi = new Transaksi();
+
+		// getall users
+		$alltrans = $transaksi->countAll(); 
+
 		return view('starter', [
 			'userData' => $this->session->userData,
+			'allcust'=>$allcust,
+			'allbarang'=>$allbarang,
+			'alltrans'=>$alltrans
 		]);
 	}
 
