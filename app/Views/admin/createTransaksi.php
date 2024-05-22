@@ -1,12 +1,18 @@
-<!-- resources/views/sales/create.blade.php -->
-@extends('auth.adminlayouts')
+<?= $this->extend('layouts/default2') ?>
 
-@section('main-content')
+<?= $this->section('main') ?>
+
+            <!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+</div>
 <div class="container">
     <h2>Form Transaksi Penjualan</h2>
-    <form id="salesForm" method="post" action="{{ route('store') }}">
-        @csrf
-        <div class="form-group">
+    <form id="salesForm" method="post" action="<?= site_url('transaksi/create-transaksi'); ?>">
+    <?= csrf_field() ?>
+         
+    <div class="form-group">
             <label for="kode">No Transaksi:</label>
             <input type="text" class="form-control" id="kode" name="kode" placeholder="(autogenerate)" readonly>
         </div>
@@ -54,17 +60,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($akun as $d1)
+                     <?php foreach ($customer as $d1){ ?>
                         <tr>
-                            <td>{{ $d1->kode }}</td>
-                            <td>{{ $d1->nik }}</td>
-                            <td>{{ $d1->nama }}</td>
-                            <td>{{ $d1->alamat }}</td>
+                            <td><?php echo $d1['kode']?></td>
+                            <td><?php echo $d1['nik'] ?></td>
+                            <td><?php echo $d1['nama'] ?></td>
+                            <td><?php echo $d1['alamat'] ?></td>
                             <td>
-                                <button class="btn btn-success btn-xs" onclick="pilih_akun('{{ $d1->kode }}','{{ $d1->id }}','{{ $d1->nama }}','{{ $d1->telepon }}')" data-dismiss="modal">PILIH</button>
+                            <button class="btn btn-success btn-xs" onclick="pilih_akun('<?php echo $d1['kode'] ?>', '<?php echo $d1['id'] ?>', '<?php echo $d1['nama'] ?>','<?php echo $d1['telepon']?>')" data-dismiss="modal">PILIH</button>
+                        
+                                <!-- <button class="btn btn-success btn-xs" onclick="pilih_akun(echo $d1['kode'],$d1['id'],$d1['nama'],$d1['telepon'])" data-dismiss="modal">PILIH</button> -->
                             </td>
                         </tr>
-                        @endforeach
+                      <?php } ?>
                     </tbody>
                 </table>
             </div>
@@ -72,19 +80,15 @@
     </div>
 </div>
 
-
-
 <div class="input-group-btn">
     <button data-toggle="modal" data-target="#modal_barang" type="button" class="btn btn-primary" title="Tampilkan data"><i class="fas fa-folder-open-o"></i>Tambah
 </div>
-
 <div class="modal fade" id="modal_barang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">Cari Barang</h4>
+                <h4 class="modal-title" id="myModalLabel">Cari Barang</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              
             </div>
             <div class="modal-body">
                 <table id="xakun" class="table table-bordered table-hover table-striped">
@@ -98,17 +102,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($barang as $d2)
-                        <tr>
-                            <td>{{ $d2->kode }}</td>
-                            <td>{{ $d2->nama }}</td>
-                            <td>{{ $d2->harga }}</td>
-                            <td>{{ $d2->jenis }}</td>
-                            <td>
-                                <button class="btn btn-success btn-xs" onclick="pilih_barang('{{ $d2->id }}','{{ $d2->kode }}','{{ $d2->nama }}')" data-dismiss="modal">PILIH</button>
-                            </td>
-                        </tr>
-                        @endforeach
+                        <?php foreach ($barang as $d2) { ?>
+                            <tr>
+                                <td><?php echo $d2['kode'] ?></td>
+                                <td><?php echo $d2['nama'] ?></td>
+                                <td><?php echo $d2['harga'] ?></td>
+                                <td><?php echo $d2['jenis'] ?></td>
+                                <td>
+                                  <button class="btn btn-success btn-xs" onclick="pilih_barang('<?php echo $d2['id'] ?>', '<?php echo $d2['kode'] ?>', '<?php echo $d2['nama'] ?>')" data-dismiss="modal">PILIH</button>
+                              </td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
@@ -116,50 +120,9 @@
     </div>
 </div>
 
+
 <br><br>
-<!-- <table id="tabelInput" class="table table-striped">
-    <thead>
-        <tr>
-            <th colspan="2">Kode Barang</th>
-            <th>Nama Barang</th>
-            <th>Qty</th>
-            <th>Harga Bandrol</th>
-            <th colspan="2">Diskon</th>
-            <th>Harga Diskon</th>
-            <th>Total</th>
-            <th colspan="2">Action</th>
-        </tr>
-        <tr>
-            <th colspan="5"></th>
-            <th>%</th>
-            <th>(Rp)</th>
-            <th colspan="5"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="firstRow">
-            <td><input type="hidden" id="id_barang" name="id_barang[]" style="width:100px;"></td>
-            <td><input type="text" id="kode_barang" name="kode[]" style="width:100px;"></td>
-            <td><input type="text" id="nama_barang" name="nama[]" style="width:120px;"></td>
-            <td><input type="text" id="qty" name="qty[]" placeholder="2" required style="width:50px;"></td>
-            <td><input type="text" id="harga_bandrol" name="harga_bandrol[]" placeholder="5000" required style="width:115px;"></td>
-            <td>
-                <input type="text" name="diskon_pct[]" placeholder="5" style="width:50px;">
-            </td>
-            <td>
-                <input type="text" name="diskon_nilai[]" placeholder="5000" style="width:95px;">
-            </td>
-            <td>
-                <input type="text" name="harga_diskon[]" style="width:120px;">
-            </td>
-            <td>
-                <input type="text" name="total[]" style="width:95px;">
-            </td>
-            <td><button type="button" class="btn btn-danger updateRow" data-toggle="modal" data-target="#modal_barang" data-id="{{ $d2->id }}">Ubah</button></td>
-            <td><button type="button" class="btn btn-danger deleteRow">Hapus</button></td>
-        </tr>
-    </tbody>
-</table> -->
+
 <table id="tabelInput" class="table table-striped">
 <thead>
     <tr>
@@ -182,10 +145,10 @@
 
 <?php
 // Lakukan koneksi ke database Anda
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "db_produksales";
+$servername = "sql313.infinityfree.com";
+$username = "if0_36586472";
+$password = "23071996RC";
+$dbname = "if0_36586472_produksales";
 
 // Buat koneksi
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -217,7 +180,7 @@ if ($result->num_rows > 0) {
     echo "<td><input type='text' name='diskon_nilai[]' value='" . $row["diskon_nilai"] . "' style='width:95px;' placeholder='(Rp)'></td>";
     echo "<td><input type='text' name='harga_diskon[]' value='" . $row["harga_diskon"] . "' style='width:120px;'></td>";
     echo "<td><input type='text' name='total[]' value='" . $row["total"] . "' style='width:95px;'></td>";
-    echo "<td><button type='button' class='btn btn-danger updateRow' data-toggle='modal' data-target='#modal_barang' data-id='" . $row["id_barang"] . "'>Ubah</button></td>";
+    // echo "<td><button type='button' class='btn btn-danger updateRow'>Ubah</button></td>";
     echo "<td><button type='button' class='btn btn-danger deleteRow'>Hapus</button></td>";
     echo "</tr>";
   }
@@ -228,12 +191,13 @@ $conn->close();
 ?>
 </table>
 <div class="modal fade" id="modal_barang_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">Cari Barang</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              
+                <h4 class="modal-title" id="myModalLabel">Cari Barang</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <table id="xakun" class="table table-bordered table-hover table-striped">
@@ -247,23 +211,24 @@ $conn->close();
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($barang as $d2)
+                        <?php foreach ($barang as $d2){ ?>
                         <tr>
-                            <td>{{ $d2->kode }}</td>
-                            <td>{{ $d2->nama }}</td>
-                            <td>{{ $d2->harga }}</td>
-                            <td>{{ $d2->jenis }}</td>
+                            <td><?php echo $d2['kode'] ?></td>
+                            <td><?php echo $d2['nama'] ?></td>
+                            <td><?php echo $d2['harga'] ?></td>
+                            <td><?php echo $d2['jenis'] ?></td>
                             <td>
-                                <button class="btn btn-success btn-xs" onclick="pilih_barang2('{{ $d2->id }}','{{ $d2->kode }}','{{ $d2->nama }}')" data-dismiss="modal">PILIH</button>
+                                <button class="btn btn-success btn-xs" onclick="pilih_barang2('<?php echo $d2['id'] ?>', '<?php echo $d2['kode'] ?>', '<?php echo $d2['nama'] ?>')">PILIH</button>
                             </td>
                         </tr>
-                        @endforeach
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+
 
         <div class="form-group">
             <label for="subtotal">Sub Total:</label>
@@ -312,59 +277,64 @@ function simpanPerubahan() {
 
     function pilih_barang2(id, kode, nama) {
     // Dapatkan baris yang sedang diubah
+      // Dapatkan baris yang sedang diubah
     var tr = $('#tabelInput tbody').find('input[name^="id_barang"][value="' + id + '"]').closest('tr');
 
-    // Update nilai-nilai pada baris yang dipilih
-    tr.find('input[name^="kode"]').val(kode);
-    tr.find('input[name^="nama"]').val(nama);
+    // Pastikan baris ditemukan
+    if (tr.length > 0) {
+        // Update nilai-nilai pada baris yang dipilih
+        tr.find('input[name^="kode"]').val(kode);
+        tr.find('input[name^="nama"]').val(nama);
 
-    // Sembunyikan modal
-    $('#modal_barang_edit').modal('hide');
+        // Sembunyikan modal
+        $('#modal_barang_edit').modal('hide');
+    } else {
+        console.error('Baris tidak ditemukan untuk id_barang: ' + id);
+    }
 }
 
-    function pilih_barang(id, kode, nama) {
-        $("#id_barang").val(id);
-        $("#kode_barang").val(kode);
-        $("#nama_barang").val(nama);
-              // Menambahkan baris baru pada tabelInput
-        var rowCount = $('#tabelInput tbody tr').length + 1;
-        var newRow = `
-            <tr>
-               
-                <td><input type="hidden" name="id_barang[]" value="${id}" readonly style="width:100px;"></td>
-                <td><input type="text" name="kode[]" value="${kode}" readonly style="width:100px;"></td>
-                <td><input type="text" name="nama[]" value="${nama}" readonly style="width:120px;"></td>
-                <td><input type="text" name="qty[]" placeholder="2" required style="width:50px;"></td>
-                <td><input type="text" name="harga_bandrol[]" required style="width:115px;"></td>
-                <td><input type="text" name="diskon_pct[]" style="width:50px;" placeholder="5"></td>
-                <td><input type="text" name="diskon_nilai[]" style="width:95px;" placeholder="5000"></td>
-                <td><input type="text" name="harga_diskon[]" style="width:120px;"></td>
-                <td><input type="text" name="total[]" style="width:95px;"></td>
-                <td><button type="button" class="btn btn-danger updateRow">Ubah</button></td>
-                <td><button type="button" class="btn btn-danger deleteRow">Hapus</button></td>
-            </tr>
-        `;
-        $('#tabelInput tbody').append(newRow);
+   function pilih_barang(id, kode, nama) {
+    // Periksa apakah ada baris di dalam tabel
+    var rowCount = $('#tabelInput tbody tr').length;
+    if (rowCount === 0) {
+        // Jika tidak ada baris, tambahkan baris baru
+        tambahBarisBaru(id, kode, nama);
+    } else {
+        // Jika ada baris, periksa apakah baris terakhir kosong
+        var lastRow = $('#tabelInput tbody tr:last');
+        var lastIdBarang = lastRow.find('input[name^="id_barang"]').val();
+        if (lastIdBarang === "") {
+            // Jika baris terakhir kosong, isi baris tersebut
+            lastRow.find('input[name^="id_barang"]').val(id);
+            lastRow.find('input[name^="kode"]').val(kode);
+            lastRow.find('input[name^="nama"]').val(nama);
+        } else {
+            // Jika baris terakhir tidak kosong, tambahkan baris baru
+            tambahBarisBaru(id, kode, nama);
+        }
     }
+}
 
-    $('.addField').click(function(){
-        var rowCount = $('#tabelInput tbody tr').length + 1;
-        $('#tabelInput tbody').append(`
-            <tr>
-                <td><input type="hidden" name="id_barang[]"></td>
-                <td><input type="text" name="kode[]"></td>
-                <td><input type="text" name="nama[]"></td>
-                <td><input type="text" name="qty[]" required></td>
-                <td><input type="text" name="harga_bandrol[]" required></td>
-                <td><input type="text" name="diskon_pct[]" placeholder="%" class="w-100"></td>
-                <td><input type="text" name="diskon_nilai[]" placeholder="(Rp)" class="w-100"></td>
-                <td><input type="text" name="harga_diskon[]" placeholder="Harga Diskon" class="w-100"></td>
-                <td><input type="text" name="total[]" placeholder="Total" class="w-100"></td>
-                <td><button type="button" class="btn btn-danger updateRow">Ubah</button></td>
-                <td><button type="button" class="btn btn-danger deleteRow">Hapus</button></td>
-            </tr>
-        `);
-    });
+// Fungsi untuk menambahkan baris baru ke tabel
+function tambahBarisBaru(id, kode, nama) {
+    var newRow = `
+        <tr>
+            <td><input type="hidden" name="id_barang[]" value="${id}" readonly style="width:100px;"></td>
+            <td><input type="text" name="kode[]" value="${kode}" readonly style="width:100px;"></td>
+            <td><input type="text" name="nama[]" value="${nama}" readonly style="width:120px;"></td>
+            <td><input type="text" name="qty[]" placeholder="2" required style="width:50px;"></td>
+            <td><input type="text" name="harga_bandrol[]" required style="width:115px;"></td>
+            <td><input type="text" name="diskon_pct[]" style="width:50px;" placeholder="%"></td>
+            <td><input type="text" name="diskon_nilai[]" style="width:95px;" placeholder="(Rp)"></td>
+            <td><input type="text" name="harga_diskon[]" style="width:120px;"></td>
+            <td><input type="text" name="total[]" style="width:95px;"></td>
+            <td><button type="button" class="btn btn-danger deleteRow">Hapus</button></td>
+        </tr>
+    `;
+    $('#tabelInput tbody').append(newRow);
+}
+
+
 
     $(document).on('click', '.deleteRow', function(){
     var row = $(this).closest('tr');
@@ -471,7 +441,7 @@ function simpanPerubahan() {
         var formData = $('#salesForm').serializeArray();
         // Kirim data ke server
         $.ajax({
-            url: "{{ route('store') }}",
+            url: "<?= site_url('transaksi/create-transaksi') ?>",
             type: "POST",
             data: formData,
             success: function(response) {
@@ -497,12 +467,13 @@ function simpanPerubahan() {
         });
     }
 
-    function pilih_akun(kode,id,nama,telepon){
-    $("#kode_customer").val(kode);
-    $("#id_cust").val(id);
-    $("#nama").val(nama);
-    $("#telepon").val(telepon);
-  }
+    function pilih_akun(kode, id, nama, telepon) {
+        $('#kode_customer').val(kode);
+        $('#id_cust').val(id);
+        $('#nama').val(nama);
+        $('#telepon').val(telepon);
+        $('#modal_akun').modal('hide');
+    }
 
     // Panggil fungsi simpanData saat form disubmit
     $('#salesForm').submit(function(e) {
@@ -511,8 +482,5 @@ function simpanPerubahan() {
     });
 </script>
 
-
-
-@endsection
-
+<?= $this->endsection() ?>
 

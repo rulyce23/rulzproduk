@@ -16,7 +16,7 @@ class TransaksiController extends Controller
     public function __construct()
     {
         // Load the session service
-        $this->session = \Config\Services::session();
+        $this->session = Services::session();
     }
     public function transaksi()
     {
@@ -30,8 +30,7 @@ class TransaksiController extends Controller
     
         // Get all transactions with related data using joins
         $alltrans = $transaksiModel
-            ->select(['t_sales.id', 't_sales.kode', 't_sales.tgl', 'm_customer.nama as nama', 't_sales_detail.qty', 't_sales.subtotal', 't_sales.diskon', 't_sales.ongkir', 't_sales.total_bayar'], false)
-
+            ->select(['t_sales.id', 't_sales.kode', 't_sales.tgl', 'm_customer.nama as nama','m_barang.nama as nama_barang', 't_sales_detail.qty', 't_sales.subtotal', 't_sales.diskon', 't_sales.ongkir', 't_sales.total_bayar'], false)
             ->join('m_customer', 'm_customer.id = t_sales.id_cust')
             ->join('t_sales_detail', 't_sales_detail.id_sales = t_sales.id')
             ->join('m_barang', 'm_barang.id = t_sales_detail.id_barang')
@@ -71,7 +70,12 @@ class TransaksiController extends Controller
 
     public function create()
     {
-   
+
+     // Check if the user is signed-in, if not redirect to the login page
+        if (!$this->session->get('isLoggedIn')) {
+            return redirect()->to('login');
+        }
+    
         // Load Barang model
         $transaksi = new Transaksi();
         $trans = $transaksi->findAll();
@@ -81,7 +85,7 @@ class TransaksiController extends Controller
         $goodies = $barang->findAll();
        
         // Load the view with session data
-        return view('modals/add-transaksi', [
+        return view('admin/createTransaksi', [
             'userData' => $this->session->get('userData'),
             'transaksi' => $trans,
             'customer' => $cust,
@@ -128,51 +132,84 @@ class TransaksiController extends Controller
         return redirect()->back()->with('success', 'Data Berhasil Di Ubah');
 	}
 
-	public function delete()
-	{
-		// get the user id
-		$id = $this->request->uri->getSegment(3);
+public function delete($id = null)
+{
+    // Get the transaction id
+    $id = $this->request->getUri()->getSegment(3);
 
-		// load user model
-		$customers = new Customer();
+    // Load the transaction model
+    $transaksi = new Transaksi();
 
-		// delete user using the id
-		$customers->delete($id);
+    // Begin a database transaction
+    $transaksi->transBegin();
 
-        return redirect()->back()->with('success','Data Berhasil Dihapus');
-	}
+    try {
+        // Delete transaction detail first
+        $transaksi_detail = new TSalesDet();
+        $transaksi_detail->delete(['id_sales' => $id]);
+
+        // Then delete the transaction
+        $transaksi->delete($id);
+
+        // Commit the transaction if both deletions are successful
+        $transaksi->transCommit();
+
+        return redirect()->back()->with('success', 'Data Berhasil Dihapus');
+    } catch (\Exception $e) {
+        // Rollback the transaction if any deletion fails
+        $transaksi->transRollback();
+
+        // Handle the error
+        return redirect()->back()->with('error', 'Gagal menghapus data: ' . $e->getMessage());
+    }
+}
 
 	public function store()
-    {
-        $request = Services::request();
+{
+    $request = Services::request();
 
-        $transaksiModel = new Transaksi();
-        $salesDetModel = new TSalesDet();
+    $transaksiModel = new Transaksi();
+    $salesDetModel = new TSalesDet();
 
-        // Dapatkan transaksi terakhir
-        $lastTransaction = $transaksiModel->orderBy('id', 'desc')->first();
-        $lastCode = $lastTransaction ? $lastTransaction['kode'] : null;
+    // Dapatkan transaksi terakhir
+    $lastTransaction = $transaksiModel->orderBy('id', 'desc')->first();
+    $lastCode = $lastTransaction ? $lastTransaction['kode'] : null;
 
-        // Dapatkan tahun dan bulan saat ini
-        $currentDate = date('Ym');
-        
-        // Tentukan nomor urutan berikutnya
-        $codeNumber = $lastCode ? intval(substr($lastCode, -4)) + 1 : 1;
+    // Dapatkan tahun dan bulan saat ini
+    $currentDate = date('Ym');
+    
+    // Tentukan nomor urutan berikutnya
+    $codeNumber = $lastCode ? intval(substr($lastCode, -4)) + 1 : 1;
 
-        // Format nomor urutan dengan panjang 4 digit dan tambahkan ke kode transaksi
-        $codeNumberFormatted = str_pad($codeNumber, 4, '0', STR_PAD_LEFT);
-        $kodeTransaksi = $currentDate . '-' . $codeNumberFormatted;
+    // Format nomor urutan dengan panjang 4 digit dan tambahkan ke kode transaksi
+    $codeNumberFormatted = str_pad($codeNumber, 4, '0', STR_PAD_LEFT);
+    $kodeTransaksi = $currentDate . '-' . $codeNumberFormatted;
+
+    // Simpan data penjualan
+    $salesData = [
+        'id_cust' => $request->getPost('id_cust'),
+        'tgl' => $request->getPost('tgl'),
+        'kode' => $kodeTransaksi,
+        'subtotal' => $request->getPost('subtotal'),
+        'diskon' => $request->getPost('diskon'),
+        'ongkir' => $request->getPost('ongkir'),
+        'total_bayar' => $request->getPost('total_bayar'),
+    ];
+
+    // Begin a database transaction
+    $transaksiModel->transBegin();
+
+    try {
+        // Jika ada ID transaksi yang disertakan, hapus transaksi dan detailnya terlebih dahulu
+        $salesId = $request->getPost('id');
+        if ($salesId) {
+            // Hapus detail penjualan terkait
+            $salesDetModel->where('id_sales', $salesId)->delete();
+            // Hapus transaksi
+            $transaksiModel->delete($salesId);
+        }
 
         // Simpan data penjualan
-        $salesData = [
-            'id_cust' => $request->getPost('id_cust'),
-            'tgl' => $request->getPost('tgl'),
-            'kode' => $kodeTransaksi,
-            'subtotal' => $request->getPost('subtotal'),
-            'diskon' => $request->getPost('diskon'),
-            'ongkir' => $request->getPost('ongkir'),
-            'total_bayar' => $request->getPost('total_bayar'),
-        ];
         $transaksiModel->insert($salesData);
         $salesId = $transaksiModel->insertID();
 
@@ -200,7 +237,17 @@ class TransaksiController extends Controller
             $salesDetModel->insert($detailData);
         }
 
+        // Commit the transaction if everything is successful
+        $transaksiModel->transCommit();
+
         return redirect()->back()->with('success', 'Data penjualan berhasil disimpan.');
+    } catch (\Exception $e) {
+        // Rollback the transaction if any error occurs
+        $transaksiModel->transRollback();
+
+        // Handle the error
+        return redirect()->back()->with('error', 'Gagal menyimpan data penjualan: ' . $e->getMessage());
     }
+}
 }
 ?>

@@ -12,7 +12,7 @@ class TSalesDet extends Model
 	protected $useSoftDeletes = false;
 
     protected $allowedFields = [
-		'id_barang', 'id_sales', 'harga_bandrol','diskon_pct','diskon_nilai','total','harga_diskon'
+		'id_barang', 'id_sales', 'harga_bandrol','diskon_pct','qty','diskon_nilai','total','harga_diskon'
 	];
 
 	protected $useTimestamps = true;
@@ -31,6 +31,7 @@ class TSalesDet extends Model
 			'diskon_pct'	=> 'required',
 			'diskon_nilai'	=> 'required',
             'total'	=> 'required',
+            'qty'=>'required',
             'harga_diskon'	=> 'required',
 		]
 	];

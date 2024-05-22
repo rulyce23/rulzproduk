@@ -14,13 +14,13 @@
 # ENVIRONMENT
 #--------------------------------------------------------------------
 
-CI_ENVIRONMENT = development
+# CI_ENVIRONMENT = production
 
 #--------------------------------------------------------------------
 # APP
 #--------------------------------------------------------------------
 
-app.baseURL = 'http://rulzproduk.kesug.com/public/'
+# app.baseURL = ''
 # If you have trouble with `.`, you could also use `_`.
 # app_baseURL = ''
 # app.forceGlobalSecureRequests = false
@@ -31,12 +31,12 @@ app.baseURL = 'http://rulzproduk.kesug.com/public/'
 #--------------------------------------------------------------------
 
 database.default.hostname = sql313.infinityfree.com
-database.default.database = if0_36586472_produksales
+database.default.database = if0_36586472_951
 database.default.username = if0_36586472
-database.default.password = 23071996RC
+database.default.password = root
 database.default.DBDriver = MySQLi
-# database.default.DBPrefix =
-# database.default.port = 3306
+database.default.DBPrefix =
+database.default.port = 3306
 
 # If you use MySQLi as tests, first update the values of Config\Database::$tests.
 # database.tests.hostname = localhost

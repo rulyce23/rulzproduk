@@ -79,7 +79,7 @@ $routes->group('', ['namespace' => 'App\Controllers'], function($routes) {
 
  $routes->get('transaksi', 'Auth\TransaksiController::transaksi', ['as' => 'transaksi']); // new
  $routes->get('transaksi/edit/(:num)', 'Auth\TransaksiController::edit'); // new
- $routes->get('transaksi/create', 'Auth\TransaksiController::create'); // new
+ $routes->get('transaksi/create/', 'Auth\TransaksiController::create'); // new
  $routes->post('transaksi/update-transaksi', 'Auth\TransaksiController::update'); // new
  $routes->get('transaksi/delete/(:num)', 'Auth\TransaksiController::delete'); // new
  $routes->post('transaksi/create-transaksi', 'Auth\TransaksiController::store');
