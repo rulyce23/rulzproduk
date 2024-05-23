@@ -31,9 +31,9 @@
                 <input class="form-control" required type="password" name="password_confirm" value="" placeholder="Confirm Password" />
             </div>
             
-            <button name="registerButton" class="btn btn-primary shadow-2 mb-4"><?= lang('Auth.register') ?></button>
+            <button name="registerButton" class="btn btn-primary shadow-2 mb-4">Register</button>
         </form>
-        <p class="mb-0 text-muted">Already registered? <a href="<?= site_url('login'); ?>"> <?= lang('Auth.login') ?></a></p>
+        <p class="mb-0 text-muted">Already registered? <a href="<?= site_url('login'); ?>"> Login</a></p>
     </div>
 </div>
 

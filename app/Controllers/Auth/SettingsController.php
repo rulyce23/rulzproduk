@@ -75,7 +75,7 @@ class SettingsController extends Controller
 			return redirect()->back()->withInput()->with('errors', $settings->errors());
         }
 
-        return redirect()->back()->with('success', lang('Auth.updateSuccess'));
+        return redirect()->back()->with('success', 'Update Success');
 	}
 
 	public function updateEmail()
@@ -126,6 +126,6 @@ class SettingsController extends Controller
 			return redirect()->back()->withInput()->with('errors', $emailconfig->errors());
         }
 
-        return redirect()->back()->with('success', lang('Auth.updateSuccess'));
+        return redirect()->back()->with('success', 'Update Success');
 	}
 }

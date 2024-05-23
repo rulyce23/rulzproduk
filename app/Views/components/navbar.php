@@ -7,7 +7,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Styles -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" >
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
@@ -35,7 +36,7 @@
        
         <li class="nav-item">
                 <a class="nav-link" href="<?= site_url('account') ?>">
-                 <i class="fas fa-fw fa-tachometer-alt"></i>Dashboard</a>
+                 <i class="fa fa-window-maximize"></i>Dashboard</a>
             </li>
         </li>
 
@@ -44,7 +45,7 @@
         <li class="nav-item">
         
         <a class="nav-link" href="<?= site_url('customer') ?>">
-            <i class="fas fa-fw fa-user-alt"></i>
+            <i class="fa fa-user-circle"></i>
             <span>Customer</span></a>     
         </li>
 
@@ -53,7 +54,7 @@
         <li class="nav-item">
 
         <a class="nav-link" href="<?= site_url('barang') ?>">
-            <i class="fas fa-fw fa-stuff-alt"></i>
+            <i class="fa fa-glass"></i>
             <span>Barang</span></a>     
         </li>
                 <hr class="sidebar-divider my-1">
@@ -61,22 +62,22 @@
         <li class="nav-item">
 
         <a class="nav-link" href="<?= site_url('transaksi') ?>">
-           <i class="fas fa-fw fa-dollar-alt"></i>
+           <i class="fa fa-shopping-basket"></i>
             <span>Transaksi</span></a>     
         </li>
         <hr class="sidebar-divider my-1">
               <li class="nav-item">
-                <a class="nav-link" href="<?= site_url('users') ?>"><i class="fas fa-fw fa-stuff-alt"></i>
+                <a class="nav-link" href="<?= site_url('users') ?>"><i class="fa fa-street-view"></i>
             <span>User Customer</span></a>  
             </li>
             <hr class="sidebar-divider my-1">
             <li class="nav-item">
-                <a class="nav-link" href="<?= site_url('users/logs') ?>"><i class="fas fa-fw fa-stuff-alt"></i>
+                <a class="nav-link" href="<?= site_url('users/logs') ?>"><i class="fa fa-info"></i>
             <span>Log</span></a>  
             </li>
             <hr class="sidebar-divider my-1">
             <li class="nav-item">
-                <a class="nav-link" href="<?= site_url('settings') ?>"><i class="fas fa-fw fa-stuff-alt"></i>
+                <a class="nav-link" href="<?= site_url('settings') ?>"><i class="fa fa-cog"></i>
             <span>Setting</span></a>  
             </li>
 
@@ -107,9 +108,10 @@
         <hr class="sidebar-divider d-none d-md-block">
 
         <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>
+          <div class="text-center d-none d-md-inline">
+  <button class="border-0" id="sidebarToggleTop">
+    <i class="fa fa-angle-left"></i>
+</button>
 
     </ul>
     <!-- End of Sidebar -->
@@ -128,24 +130,24 @@
                 <i class="fa fa-bars" style="color: #192446;"></i>
                 </button>
 
-                <!-- Topbar Navbar -->
+         <!-- Topbar Navbar -->
                 <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
-          <li class="nav-item dropdown">
-            <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="text-capitalize"><?= $userData['name'] ?? "Admin" ?></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
-              <a class="dropdown-item" href="<?= site_url('profile') ?>">Profile</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="<?= site_url('logout') ?>">Logout</a>
-            </div>
-          </li>
-        </ul>
+         <li class="nav-item">
+    <a class="nav-link dropdown-toggle mr-md-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="text-capitalize"><?= $userData['name'] ?? "Admin" ?></span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="<?= site_url('profile') ?>"><i class="fa fa-user"></i> Profile</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="<?= site_url('logout') ?>"><i class="fa fa-sign-out"></i> Logout</a>
+    </div>
+</li>
 
+        </ul>
             </nav>
             <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
+    <i class="fa fa-angle-up"></i>
 </a>
 </div>
 

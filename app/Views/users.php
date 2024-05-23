@@ -42,7 +42,7 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-3">
         <h1 class="h2">Users</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createuserformmodal"><i class="fas fa-user-plus"></i> Create User</button>
+            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createuserformmodal"><i class="fa fa-plus"></i> Buat User Login</button>
         </div>
     </div>
 
@@ -73,11 +73,11 @@
                         </td>
                         <td class="text-right">
                             <?php if ($item['active'] == 0) : ?>
-                                <a class="btn btn-outline-secondary btn-sm" href="<?= site_url('users/enable/').$item['id'] ?>"><i class="fas fa-user-check"></i> Enable</a>
+                                <a class="btn btn-outline-secondary btn-sm" href="<?= site_url('users/enable/').$item['id'] ?>"><i class="fa fa-user-check"></i> Enable</a>
                             <?php endif ?>
 
-                            <a class="btn btn-outline-secondary btn-sm" href="<?= site_url('users/edit/').$item['id'] ?>"><i class="fas fa-edit"></i> Edit</a>
-                            <a class="btn btn-outline-secondary btn-sm" href="<?= site_url('users/delete/').$item['id'] ?>"><i class="fas fa-trash"></i> Delete</a>
+                            <a class="btn btn-outline-secondary btn-sm" href="<?= site_url('users/edit/').$item['id'] ?>"><i class="fa fa-edit"></i> Edit</a>
+                            <a class="btn btn-outline-secondary btn-sm" href="<?= site_url('users/delete/').$item['id'] ?>"><i class="fa fa-trash"></i> Delete</a>
                         </td>
                     </tr>
                     <?php endforeach;?>

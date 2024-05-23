@@ -1,4 +1,4 @@
-<?= $this->extend('auth/layouts/default') ?>
+<?= $this->extend('layouts/default2') ?>
 
 <?= $this->section('main') ?>
 
@@ -93,8 +93,8 @@
   <div class="card p-3">
     <form action="<?= site_url('delete-account') ?>" method="POST" accept-charset="UTF-8" onsubmit="deleteAccount.disabled = true; return true;">
       <?= csrf_field() ?>
-      <h6 class="pb-2 mb-0 mt-4">Account Removal</h6>
-      <p><?= lang('Auth.deleteAccountInfo') ?></p>
+      <h6 class="pb-2 mb-0 mt-4">Remove Akun</h6>
+      <p>Delete Akun Info</p>
 
       <div class="form-group row mt-3">
         <label class="col-sm-2 col-form-label">Current Password</label>
@@ -105,7 +105,7 @@
 
       <div class="form-group row">
         <div class="col-sm-10">
-          <button name="deleteAccount" type="submit" class="btn btn-danger" onclick="return confirm('<?= lang('Auth.areYouSure') ?>')"> <?= lang('Auth.deleteAccount') ?></button>
+          <button name="deleteAccount" type="submit" class="btn btn-danger" onclick="return confirm('<?= lang('Auth.areYouSure') ?>')">Delete Akun </button>
         </div>
       </div>
     </form>

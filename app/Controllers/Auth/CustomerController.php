@@ -71,42 +71,44 @@ public function customer()
             'customer' => $cust,
         ]);
     }
-	public function update()
-	{
-		$rules = [
-			'id'	=> 'required|is_natural',
-			'kode'	=> 'required',
-			'nama'	=> 'required',
-			'jk'	=> 'required',
-			'nik'	=> 'required',
-            'telepon'=> 'required' ,
-            'tgl_lahir'	=> 'required'      
-		];
+public function update()
+{
+    $rules = [
+        'id'        => 'required|is_natural',
+        'kode'      => 'required',
+        'nama'      => 'required',
+        'jk'        => 'required',
+        'nik'       => 'required',
+        'telepon'   => 'required',
+        'tgl_lahir' => 'required'
+    ];
 
-		if (! $this->validate($rules)) {
-			return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
-		}
+    if (! $this->validate($rules)) {
+        return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+    }
 
-		$cust = new Customer();
+    $cust = new Customer();
 
-		$custr = [
-			'id'  	=> $this->request->getPost('id'),
-			'kode' 	=> $this->request->getPost('kode'),
-			'nama' 	=> $this->request->getPost('nama'),
-			'jk' 	=> $this->request->getPost('jk'),
-			'nik' 	=> $this->request->getPost('nik'),
-			'telepon' 	=> $this->request->getPost('telepon'),
-            'alamat' 	=> $this->request->getPost('alamat'),
-            'goldar'	=> $this->request->getPost('goldar'),
-            'tgl_lahir'	=> $this->request->getPost('tgl_lahir'),
-		];
+    $custr = [
+        'id'        => $this->request->getPost('id'),
+        'kode'      => $this->request->getPost('kode'),
+        'nama'      => $this->request->getPost('nama'),
+        'jk'        => $this->request->getPost('jk'),
+        'nik'       => $this->request->getPost('nik'),
+        'telepon'   => $this->request->getPost('telepon'),
+        'alamat'    => $this->request->getPost('alamat'),
+        'goldar'    => $this->request->getPost('goldar'),
+        'tgl_lahir' => $this->request->getPost('tgl_lahir'),
+    ];
 
-		if (! $custr->save($cust)) {
-			return redirect()->back()->withInput()->with('errors', $custr->errors());
-        }
+    // Attempt to save the customer data
+    if (! $cust->save($custr)) {
+        return redirect()->back()->withInput()->with('errors', $cust->errors());
+    }
 
-        return redirect()->back()->with('success', 'Data Berhasil Di Ubah');
-	}
+    return redirect()->back()->with('success', 'Data Berhasil Di Ubah');
+}
+
 
 	public function delete()
 	{

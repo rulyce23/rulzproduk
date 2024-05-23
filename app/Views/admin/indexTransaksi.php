@@ -1,18 +1,21 @@
-<!-- Load main layout with datatable -->
-<?= $this->extend('layouts/default-table') ?>
+<?= $this->extend('layouts/default2') ?>
 
-<!-- Load main content -->
 <?= $this->section('main') ?>
+
+            <!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fa fa-angle-up"></i>
+</a>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-3">
         <h1 class="h2">Transaksi</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <a class="btn btn-outline-primary" href="<?= site_url('transaksi/create') ?>"><i class="fas fa-plus"></i> Buat Transaksi</a>
+            <a class="btn btn-outline-primary" href="<?= site_url('transaksi/create') ?>"><i class="fa fa-plus"></i> Buat Transaksi</a>
         </div>
     </div>
 
     <div class="card p-3">
         <div class="table-responsive">
-            <table width="100%" class="table table-hover" id="dataTables-table" data-order='[[ 0, "asc" ]]'>
+            <table width="100%" class="table table-hover table-responsive" id="dataTables-table" data-order='[[ 0, "asc" ]]'>
                 <thead>
                     <tr>
                         <th scope="col">No</th>
@@ -43,7 +46,7 @@
                             <td><?= $transaksi['total_bayar'] ?></td>
                             <td class="text-right">
                                 <!-- Add edit and delete buttons here -->
-                                <a href="<?= site_url('transaksi/delete/' . $transaksi['id']) ?>" class="btn btn-sm btn-danger">Delete</a>
+                                <a href="<?= site_url('transaksi/delete/' . $transaksi['id']) ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>Delete</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

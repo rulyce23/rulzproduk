@@ -11,11 +11,11 @@
 
 <!-- load main content -->
 <?= $this->section('main') ?>
-
+ 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-3">
         <h1 class="h2">Customer</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createcustomerformmodal"><i class="fas fa-user-plus"></i> Create User</button>
+            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createcustomerformmodal"><i class="fa fa-plus"></i> Tambah Customer</button>
         </div>
     </div>
 
@@ -44,8 +44,8 @@
                         <td><?= $item['jk'] ?></td>
                       
                         <td class="text-right">
-                            <a class="btn btn-outline-secondary btn-sm" href="<?= site_url('customer/edit/').$item['id'] ?>"><i class="fas fa-edit"></i> Edit</a>
-                            <a class="btn btn-outline-secondary btn-sm" href="<?= site_url('customer/delete/').$item['id'] ?>"><i class="fas fa-trash"></i> Delete</a>
+                            <a class="btn btn-outline-secondary btn-sm" href="<?= site_url('customer/edit/').$item['id'] ?>"><i class="fa fa-edit"></i> Edit</a>
+                            <a class="btn btn-outline-secondary btn-sm" href="<?= site_url('customer/delete/').$item['id'] ?>"><i class="fa fa-trash"></i> Delete</a>
                         </td>
                     </tr>
                     <?php endforeach;?>

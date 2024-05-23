@@ -1,5 +1,5 @@
 <!-- load main layout with datatable -->
-<?= $this->extend('layouts/default-table2')?>
+<?= $this->extend('layouts/default2')?>
 
 <!-- load main content -->
 <?= $this->section('main') ?>

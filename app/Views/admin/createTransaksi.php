@@ -4,9 +4,19 @@
 
             <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
+    <i class="fa fa-angle-up"></i>
 </a>
-</div>
+<style>
+.table-container {
+    overflow-x: auto;
+    width: 100%;
+    -webkit-overflow-scrolling: touch; /* Enables smooth scrolling on iOS */
+}
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS devices */
+}
+</style>
 <div class="container">
     <h2>Form Transaksi Penjualan</h2>
     <form id="salesForm" method="post" action="<?= site_url('transaksi/create-transaksi'); ?>">
@@ -25,7 +35,7 @@
             <input type="text" class="form-control" id="kode_customer" name="kode" readonly> 
             <br>
             <div class="input-group-btn">
-            <button data-toggle="modal" data-target="#modal_akun" type="button" class="btn btn-primary" title="Tampilkan data"><i class="fas fa-folder-open-o"></i>tampilkan
+            <button data-toggle="modal" data-target="#modal_akun" type="button" class="btn btn-primary" title="Tampilkan data"><i class="fa fa-folder-open"></i> Tampilkan Customer
            </div>
            <br>
            <br>
@@ -81,7 +91,7 @@
 </div>
 
 <div class="input-group-btn">
-    <button data-toggle="modal" data-target="#modal_barang" type="button" class="btn btn-primary" title="Tampilkan data"><i class="fas fa-folder-open-o"></i>Tambah
+    <button data-toggle="modal" data-target="#modal_barang" type="button" class="btn btn-primary" title="Tampilkan data"><i class="fa fa-folder-open"></i> Tampilkan Barang
 </div>
 <div class="modal fade" id="modal_barang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -122,7 +132,7 @@
 
 
 <br><br>
-
+<div class ="table-responsive">
 <table id="tabelInput" class="table table-striped">
 <thead>
     <tr>
@@ -181,7 +191,7 @@ if ($result->num_rows > 0) {
     echo "<td><input type='text' name='harga_diskon[]' value='" . $row["harga_diskon"] . "' style='width:120px;'></td>";
     echo "<td><input type='text' name='total[]' value='" . $row["total"] . "' style='width:95px;'></td>";
     // echo "<td><button type='button' class='btn btn-danger updateRow'>Ubah</button></td>";
-    echo "<td><button type='button' class='btn btn-danger deleteRow'>Hapus</button></td>";
+    echo "<td><button type='button' class='btn btn-danger deleteRow'><i class='fa fa-trash'></i> Hapus</button></td>";
     echo "</tr>";
   }
 } else {
@@ -190,6 +200,7 @@ if ($result->num_rows > 0) {
 $conn->close();
 ?>
 </table>
+</div>
 <div class="modal fade" id="modal_barang_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -246,8 +257,8 @@ $conn->close();
             <label for="total_bayar">Total Bayar:</label>
             <input type="number" class="form-control" id="total_bayar" name="total_bayar" readonly>
         </div>
-        <button type="submit" class="btn btn-primary">Simpan</button>
-        <button type="reset" class="btn btn-secondary">Batal</button>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Save</button>
+        <button type="reset" class="btn btn-secondary"><i class="fa fa-close"></i> Close</button>
     </form>
 </div>
 

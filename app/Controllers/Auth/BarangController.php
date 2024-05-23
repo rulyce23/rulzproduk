@@ -71,37 +71,39 @@ class BarangController extends Controller
         ]);
     }
 
-	public function update()
-	{
-		$rules = [
-			'id'	=> 'required|is_natural',
-			'kode'	=> 'required',
-			'nama'	=> 'required',
-			'harga'	=> 'required',
-			'jenis'	=> 'required',
-		];
+public function update()
+{
+    $rules = [
+        'id'        => 'required|is_natural',
+        'kode'      => 'required',
+        'nama'      => 'required',
+        'jenis'        => 'required',
+        'harga'       => 'required',
+        
+    ];
 
-		if (! $this->validate($rules)) {
-			return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
-		}
+    if (! $this->validate($rules)) {
+        return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+    }
 
-		$barang = new Barang();
+    $barang = new Barang();
 
-		$barangs = [
-			'id'  	=> $this->request->getPost('id'),
-			'kode' 	=> $this->request->getPost('kode'),
-			'nama' 	=> $this->request->getPost('nama'),
-			'harga' 	=> $this->request->getPost('harga'),
-			'jenis' 	=> $this->request->getPost('jenis'),
-		
-		];
+    $goodies = [
+       'id'        => $this->request->getPost('id'),
+        'kode'      => $this->request->getPost('kode'),
+        'nama'      => $this->request->getPost('nama'),
+        'harga'        => $this->request->getPost('harga'),
+        'jenis'       => $this->request->getPost('jenis'),
+    ];
 
-		if (! $barangs->save($barang)) {
-			return redirect()->back()->withInput()->with('errors', $barangs->errors());
-        }
+    // Attempt to save the customer data
+    if (! $barang->save($goodies)) {
+        return redirect()->back()->withInput()->with('errors', $barang->errors());
+    }
 
-        return redirect()->back()->with('success', 'Data Berhasil Di Ubah');
-	}
+    return redirect()->back()->with('success', 'Data Berhasil Di Ubah');
+}
+
 
 	public function delete()
 	{

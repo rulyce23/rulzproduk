@@ -22,7 +22,7 @@
             <input type="text" class="form-control" id="kode_customer" name="kode" readonly> 
             <br>
             <div class="input-group-btn">
-            <button data-toggle="modal" data-target="#modal_akun" type="button" class="btn btn-primary" title="Tampilkan data"><i class="fas fa-folder-open-o"></i>tampilkan
+            <button data-toggle="modal" data-target="#modal_akun" type="button" class="btn btn-primary" title="Tampilkan data"><i class="fa fa-folder-open-o"></i>tampilkan
            </div>
            <br>
            <br>
@@ -78,7 +78,7 @@
 </div>
 
 <div class="input-group-btn">
-    <button data-toggle="modal" data-target="#modal_barang" type="button" class="btn btn-primary" title="Tampilkan data"><i class="fas fa-folder-open-o"></i>Tambah
+    <button data-toggle="modal" data-target="#modal_barang" type="button" class="btn btn-primary" title="Tampilkan data"><i class="fa fa-folder-open-o"></i>Tambah
 </div>
 <div class="modal fade" id="modal_barang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -241,8 +241,8 @@ $conn->close();
             <label for="total_bayar">Total Bayar:</label>
             <input type="number" class="form-control" id="total_bayar" name="total_bayar" readonly>
         </div>
-        <button type="submit" class="btn btn-primary">Simpan</button>
-        <button type="reset" class="btn btn-secondary">Batal</button>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>Simpan</button>
+        <button type="reset" class="btn btn-secondary"><i class="fa fa-close"></i>Batal</button>
     </form>
 </div>
 

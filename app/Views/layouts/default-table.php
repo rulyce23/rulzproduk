@@ -14,6 +14,8 @@
 <script src="vendor/jquery/jquery.min.js" ></script>
 <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="js/sb-admin-2.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
 </head>
 
 <body class="bg-light">

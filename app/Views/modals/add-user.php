@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="createuserformmodaltitle">Register a new user</h5>
+       <h5 class="modal-title" id="createuserformmodaltitle">Buat User Baru</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -27,19 +27,19 @@
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input class="form-control" required type="email" name="email" value="<?= old('email') ?>" placeholder="<?= lang('Auth.email') ?>"/>
+                <input class="form-control" required type="email" name="email" value="<?= old('email') ?>" placeholder="Email"/>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input class="form-control" required type="password" name="password" value="" placeholder="<?= lang('Auth.password') ?>" />
+                <input class="form-control" required type="password" name="password" value="" placeholder="Password" />
             </div>
             <div class="form-group">
                 <input class="form-control" required type="password" name="password_confirm" value="" placeholder="Confirm Password" />
             </div>
 
             <div class="text-right">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
-                <button type="submit" class="btn btn-primary" name="registerButton"><i class="fas fa-plus-circle"></i> <?= lang('Auth.register') ?></button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                <button type="submit" class="btn btn-primary" name="registerButton"><i class="fa fa-plus"></i>Save</button>
             </div>
         </form>
       </div>

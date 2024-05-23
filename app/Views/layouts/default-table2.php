@@ -11,12 +11,12 @@
     <?= $this->renderSection('style') ?>
 
     <!-- default styles  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/../vendor/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="/../vendor/fontawesome/css/solid.min.css">
     <link rel="stylesheet" href="/../vendor/fontawesome/css/brands.min.css">
     <link rel="stylesheet" href="/../vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/../vendor/datatables/datatables.css">
-    <link rel="stylesheet" href="/../css/starter-template.css">
 </head>
 
 <body class="bg-light">

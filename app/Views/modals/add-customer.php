@@ -55,8 +55,8 @@
             </div>
 
             <div class="text-right">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times-circle"></i> Close</button>
-                <button type="submit" class="btn btn-primary" name="registerButton"><i class="fas fa-plus-circle"></i>Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                <button type="submit" class="btn btn-primary" name="registerButton"><i class="fa fa-plus"></i>Save</button>
             </div>
         </form>
       </div>

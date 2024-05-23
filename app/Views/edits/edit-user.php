@@ -1,5 +1,5 @@
 <!-- load main layout -->
-<?= $this->extend('layouts/default-table2') ?>
+<?= $this->extend('layouts/default2') ?>
 
 <!-- load main content -->
 <?= $this->section('main') ?>
@@ -7,7 +7,7 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-3">
         <h1 class="h2">Edit user</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <a href="<?= site_url('users') ?>" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i> Return</a>
+            <a href="<?= site_url('users') ?>" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i> Return</a>
         </div>
     </div>
 
@@ -48,7 +48,7 @@
               </div>
             <div class="text-right">
                 <input name="id" type="hidden" value="<?= $user['id'] ?>" readonly/>
-                <button type="submit" class="btn btn-primary" name="Button"><i class="fas fa-check-circle"></i> Update</button>
+                <button type="submit" class="btn btn-primary" name="Button"><i class="fa fa-check"></i> Update</button>
             </div>
         </form>
     </div>

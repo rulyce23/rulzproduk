@@ -1,23 +1,23 @@
 <?= $this->extend('layouts/auth') ?>
 <?= $this->section('main') ?>
 
-<h1><?= lang('Auth.resetPassword') ?></h1>
+<h1>Reset Password</h1>
 
 <?= view('App\Views\components\notifications') ?>
 
 <form method="POST" action="<?= site_url('reset-password'); ?>" accept-charset="UTF-8">
     <?= csrf_field() ?>
     <p>
-        <label><?= lang('Auth.newPassword') ?></label><br />
+        <label>New Password</label><br />
         <input required type="password" name="password" value="" />
     </p>
     <p>
-        <label><?= lang('Auth.newPasswordAgain') ?></label><br />
+        <label>Retype New Password</label><br />
         <input required type="password" name="password_confirm" value="" />
     </p>
     <p>
         <input type="hidden" name="token" value="<?= $_GET['token'] ?>" />
-        <button type="submit"><?= lang('Auth.resetPassword') ?></button>
+        <button type="submit">Reset Password</button>
     </p>
 </form>
 

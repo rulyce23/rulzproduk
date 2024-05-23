@@ -28,7 +28,7 @@ class UsersController extends Controller
 	public function __construct()
 	{
 		// start session
-		$this->session = Services::session();
+		$this->session = \Config\Services::session();
 	}
 
     //--------------------------------------------------------------------
@@ -74,51 +74,51 @@ class UsersController extends Controller
 			]);
 	}
 
-	public function enable()
-	{
-		// get the user id
-		$id = $this->request->uri->getSegment(3);
+public function enable()
+{
+    // get the user id from the third segment of the URI
+    $id = $this->request->getUri()->getSegment(3);
 
-		// validation does not work when data is not submitted via post form
-		// $rules = [
-		// 	'id'	=> 'required|integer',
-		// ];
+    // If you want to validate the ID, you can uncomment and use the following lines:
+    // $rules = [
+    //     'id'    => 'required|integer',
+    // ];
+    // if (! $this->validate($rules)) {
+    //     return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+    // }
 
-		// if (! $this->validate($rules)) {
-		// 	return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
-		// }
+    $users = new UserModel();
 
-		$users = new UserModel();
+    $user = [
+        'id'    => $id,
+        'active'    => 1,
+    ];
 
-		$user = [
-			'id'  	=> $id,
-			'active'  	=> 1,
-		];
+    if (! $users->save($user)) {
+        return redirect()->back()->withInput()->with('errors', $users->errors());
+    }
 
-		if (! $users->save($user)) {
-			return redirect()->back()->withInput()->with('errors', $users->errors());
-        }
+    return redirect()->back()->with('success', 'User Akun Aktif');
+}
 
-        return redirect()->back()->with('success', lang('Auth.enableUser'));
-	}
 
 	public function edit()
-	{
-		// get the user id
-		$id = $this->request->uri->getSegment(3);
+{
+    // get the user id from the 3rd segment of the URI
+    $id = $this->request->getUri()->getSegment(3);
 
-		// load user model
-		$users = new UserModel();
+    // load user model
+    $users = new UserModel();
 
-		// get user data using the id
-		$user = $users->where('id', $id)->first(); 
+    // get user data using the id
+    $user = $users->where('id', $id)->first(); 
 
-		// load the view with session data
-		return view('edit-user', [
-				'userData' => $this->session->userData, 
-				'user' => $user, 
-			]);
-	}
+    // load the view with session data
+    return view('edit-user', [
+            'userData' => $this->session->get('userData'), 
+            'user' => $user, 
+        ]);
+}
 
 	public function update()
 	{
@@ -150,7 +150,7 @@ class UsersController extends Controller
 			return redirect()->back()->withInput()->with('errors', $users->errors());
         }
 
-        return redirect()->back()->with('success', lang('Auth.updateSuccess'));
+        return redirect()->back()->with('success',  'Update Success');
 	}
 
 	public function delete()
@@ -164,7 +164,7 @@ class UsersController extends Controller
 		// delete user using the id
 		$users->delete($id);
 
-        return redirect()->back()->with('success', lang('Auth.accountDeleted'));
+        return redirect()->back()->with('success',  'Akun Delete Success');
 	}
 
 	public function createUser()
@@ -197,7 +197,7 @@ class UsersController extends Controller
         // send_activation_email($user['email'], $user['activate_hash']);
 
 		// success
-        return redirect()->back()->with('success', 'Success! You created a new account');
+        return redirect()->back()->with('success', 'Success! New Account Was Created');
 	}
 
 	public function userLogs() 
